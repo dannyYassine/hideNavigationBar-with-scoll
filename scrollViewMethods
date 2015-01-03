@@ -1,6 +1,9 @@
+
 Scrolling the table view will hide and unhide the navigation bar
 
-// where // kstatusBarHeight = 20; // knavBarHeight == 44;
+// where
+// kstatusBarHeight = 20;
+// knavBarHeight == 44;
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView {
 
