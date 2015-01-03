@@ -13,7 +13,7 @@ if (self.statusView == nil) {
     self.statusView.backgroundColor = CRGB(255, 129, 0);
     [self.view insertSubview:self.statusView aboveSubview:self.navigationController.navigationBar];
 }
-
+ 
 if (scrollView.contentOffset.y >= 0) {
     if (scrollView.contentOffset.y <=44) {
           self.tableView.frame = CGRectMake(0, kstatusBarHeight+knavBarHeight-scrollView.contentOffset.y, self.view.frame.size.width, self.view.frame.size.height-kstatusBarHeight-knavBarHeight+scrollView.contentOffset.y);
