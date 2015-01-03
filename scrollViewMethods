@@ -9,7 +9,7 @@ Scrolling the table view will hide and unhide the navigation bar
 
 // in order to have a background color behind the status bar
 if (self.statusView == nil) {
-    self.statusView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
+    self.statusView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kstatusBarHeight)];
     self.statusView.backgroundColor = CRGB(255, 129, 0);
     [self.view insertSubview:self.statusView aboveSubview:self.navigationController.navigationBar];
 }
