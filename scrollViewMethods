@@ -1,9 +1,20 @@
 
 Scrolling the table view will hide and unhide the navigation bar
-
 // where
 // kstatusBarHeight = 20;
-// knavBarHeight == 44;
+// knavBarHeight = 44;
+
+-(void) viewDidLoad {
+    
+    //If you want your navigationBar Items to fade away as you are scrolling down your tableView,
+    
+    self.leftButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 20)];
+    [self.leftButton setTitle:@"Back" forState:UIControlStateNormal];
+    [self.leftButton addTarget:self action:@selector(dismissMe) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]initWithCustomView:self.leftButton];
+    self.navigationItem.leftBarButtonItem = leftButton;
+}
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView {
 
@@ -16,16 +27,23 @@ if (self.statusView == nil) {
  
 if (scrollView.contentOffset.y >= 0) {
     if (scrollView.contentOffset.y <=44) {
-          self.tableView.frame = CGRectMake(0, kstatusBarHeight+knavBarHeight-scrollView.contentOffset.y, self.view.frame.size.width, self.view.frame.size.height-kstatusBarHeight-knavBarHeight+scrollView.contentOffset.y);
+    
+        self.navigationController.navigationBar.frame = CGRectMake(0, -scrollView.contentOffset.y+20, self.view.frame.size.width, 44);
+        self.tableView.frame = CGRectMake(0, kstatusBarHeight+knavBarHeight-scrollView.contentOffset.y, self.view.frame.size.width, self.view.frame.size.height-kstatusBarHeight-knavBarHeight+scrollView.contentOffset.y);
 
     } else if (scrollView.contentOffset.y > 44) {
-            self.tableView.frame = CGRectMake(0, kstatusBarHeight, self.view.frame.size.width, self.view.frame.size.height-statusBarHeight);
+    
+        self.navigationController.navigationBar.frame = CGRectMake(0,-24, self.view.frame.size.width, 44);
+        self.tableView.frame = CGRectMake(0, kstatusBarHeight, self.view.frame.size.width, self.view.frame.size.height-statusBarHeight);
+  
     } else if (scrollView.contentOffset.y == 0) {
         self.tableView.frame = CGRectMake(0, kstatusBarHeight+knavBarHeight, self.view.frame.size.width, self.view.frame.size.height-kstatusBarHeight-knavBarHeight);
     }
 
-    [self.navigationController.navigationBar setAlpha:1-(scrollView.contentOffset.y/50)];
-    self.navigationController.navigationBar.frame = CGRectMake(0, -scrollView.contentOffset.y+20, self.view.frame.size.width, knavBarHeight);
+    //Fade away navigation bar items as you scroll
+    self.navigationItem.titleView.alpha =1-(scrollView.contentOffset.y/25);
+    self.leftButton.alpha = 1-(scrollView.contentOffset.y/25);
+    
 } else if (scrollView.contentOffset.y < 0) {
 }
 }
